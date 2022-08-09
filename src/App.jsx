@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { usePosts } from "./components/hooks/usePosts";
 import axios from "axios";
 
@@ -19,6 +19,10 @@ function App() {
 	const [filter, setFilter] = useState({sort: '', query: ''})
 	const [modal, setModal] = useState(false);
 	const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+
+	useEffect(() => {
+		fetchPosts();
+	}, [])
 
 	const createPost = (newPost) => {
 		setPosts([...posts, newPost])
